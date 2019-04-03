@@ -4,9 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3e1e810ae7764ec49e212dcdafb6b32b" Name="Diagram1">
-        <EntityTypeShape EntityType="ParkingModel.ParkingLog" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ParkingModel.UserProfile" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="53e333a2314b4f16aace24fe58a22d5d" Name="Diagram1">
+        <EntityTypeShape EntityType="ParkingModel.ParkingLog" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkingModel.UserProfile" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="ParkingModel.FK_ParkingLogs_UserProfile_INAgentMACID" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkingModel.FK_ParkingLogs_UserProfile_OUTAgentMACID" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

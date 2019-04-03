@@ -10,8 +10,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="OUTAgentMACID" Type="varchar" MaxLength="50" />
           <Property Name="INAgentMACID" Type="varchar" MaxLength="50" />
+          <Property Name="OUTAgentMACID" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="varchar" MaxLength="20" />
           <Property Name="SessionID" Type="varchar" MaxLength="100" />
           <Property Name="PlateNumber" Type="varchar" MaxLength="30" />
           <Property Name="imagecdn" Type="varchar" MaxLength="100" />
@@ -19,18 +20,50 @@
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
-            <PropertyRef Name="UserId" />
+            <PropertyRef Name="UserName" />
           </Key>
           <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="50" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="UserType" Type="int" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK_ParkingLogs_UserProfile_INAgentMACID">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="ParkingLogs" Type="Self.ParkingLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="ParkingLogs">
+              <PropertyRef Name="INAgentMACID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParkingLogs_UserProfile_OUTAgentMACID">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="ParkingLogs" Type="Self.ParkingLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="ParkingLogs">
+              <PropertyRef Name="OUTAgentMACID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ParkingModelStoreContainer">
           <EntitySet Name="ParkingLogs" EntityType="Self.ParkingLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ParkingLogs_UserProfile_INAgentMACID" Association="Self.FK_ParkingLogs_UserProfile_INAgentMACID">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="ParkingLogs" EntitySet="ParkingLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParkingLogs_UserProfile_OUTAgentMACID" Association="Self.FK_ParkingLogs_UserProfile_OUTAgentMACID">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="ParkingLogs" EntitySet="ParkingLogs" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -42,27 +75,64 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OUTAgentMACID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="INAgentMACID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OUTAgentMACID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="SessionID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="PlateNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="imagecdn" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK_ParkingLogs_UserProfile_INAgentMACID" FromRole="ParkingLogs" ToRole="UserProfile" />
+          <NavigationProperty Name="UserProfile1" Relationship="Self.FK_ParkingLogs_UserProfile_OUTAgentMACID" FromRole="ParkingLogs" ToRole="UserProfile" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
-            <PropertyRef Name="UserId" />
+            <PropertyRef Name="UserName" />
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="UserType" Type="Int32" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ParkingLogs" Relationship="Self.FK_ParkingLogs_UserProfile_INAgentMACID" FromRole="UserProfile" ToRole="ParkingLogs" />
+          <NavigationProperty Name="ParkingLogs1" Relationship="Self.FK_ParkingLogs_UserProfile_OUTAgentMACID" FromRole="UserProfile" ToRole="ParkingLogs" />
         </EntityType>
+        <Association Name="FK_ParkingLogs_UserProfile_INAgentMACID">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="ParkingLogs" Type="Self.ParkingLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="ParkingLogs">
+              <PropertyRef Name="INAgentMACID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParkingLogs_UserProfile_OUTAgentMACID">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="ParkingLogs" Type="Self.ParkingLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="ParkingLogs">
+              <PropertyRef Name="OUTAgentMACID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ParkingEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ParkingLogs" EntityType="Self.ParkingLog" />
           <EntitySet Name="UserProfiles" EntityType="Self.UserProfile" />
+          <AssociationSet Name="FK_ParkingLogs_UserProfile_INAgentMACID" Association="Self.FK_ParkingLogs_UserProfile_INAgentMACID">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="ParkingLogs" EntitySet="ParkingLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParkingLogs_UserProfile_OUTAgentMACID" Association="Self.FK_ParkingLogs_UserProfile_OUTAgentMACID">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="ParkingLogs" EntitySet="ParkingLogs" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -74,8 +144,9 @@
             <EntityTypeMapping TypeName="ParkingModel.ParkingLog">
               <MappingFragment StoreEntitySet="ParkingLogs">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="OUTAgentMACID" ColumnName="OUTAgentMACID" />
                 <ScalarProperty Name="INAgentMACID" ColumnName="INAgentMACID" />
+                <ScalarProperty Name="OUTAgentMACID" ColumnName="OUTAgentMACID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="SessionID" ColumnName="SessionID" />
                 <ScalarProperty Name="PlateNumber" ColumnName="PlateNumber" />
                 <ScalarProperty Name="imagecdn" ColumnName="imagecdn" />

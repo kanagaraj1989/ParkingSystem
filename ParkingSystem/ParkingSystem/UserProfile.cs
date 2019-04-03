@@ -14,11 +14,23 @@ namespace ParkingSystem
     
     public partial class UserProfile
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public UserProfile()
+        {
+            this.ParkingLogs = new HashSet<ParkingLog>();
+            this.ParkingLogs1 = new HashSet<ParkingLog>();
+        }
+    
         public int UserId { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<int> UserType { get; set; }
         public string CreatedBy { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ParkingLog> ParkingLogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ParkingLog> ParkingLogs1 { get; set; }
     }
 }

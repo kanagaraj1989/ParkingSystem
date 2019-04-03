@@ -15,11 +15,15 @@ namespace ParkingSystem
     public partial class ParkingLog
     {
         public int Id { get; set; }
-        public string OUTAgentMACID { get; set; }
         public string INAgentMACID { get; set; }
+        public string OUTAgentMACID { get; set; }
+        public string Status { get; set; }
         public string SessionID { get; set; }
         public string PlateNumber { get; set; }
         public string imagecdn { get; set; }
         public Nullable<System.DateTime> TimeStamp { get; set; }
+    
+        public virtual UserProfile UserProfile { get; set; }
+        public virtual UserProfile UserProfile1 { get; set; }
     }
 }

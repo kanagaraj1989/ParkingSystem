@@ -106,8 +106,8 @@
     <Content Include="Global.asax" />
     <Content Include="ParkingModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ParkingModel.Context.cs</LastGenOutput>
       <DependentUpon>ParkingModel.edmx</DependentUpon>
+      <LastGenOutput>ParkingModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="ParkingModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -127,7 +127,9 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Login\Signin.cshtml" />
     <Content Include="Views\Login\AdminUserDashBoard.cshtml" />
     <Content Include="Views\Parking\EntryGate.cshtml" />

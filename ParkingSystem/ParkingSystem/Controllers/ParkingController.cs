@@ -10,12 +10,23 @@ namespace ParkingSystem.Controllers
     {
         public ActionResult EntryGate(ParkingLog parkingLog)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid 
+                && Session["UserID"] != null
+                && Session["UserType"].ToString().Equals("2")
+                && !string.IsNullOrEmpty(parkingLog.PlateNumber))
             {
-
+                using (ParkingEntities db = new ParkingEntities())
+                {
+                    parkingLog.Status = "OnGoing";
+                    parkingLog.SessionID = Session.SessionID;
+                    parkingLog.TimeStamp = DateTime.Now;
+                    parkingLog.INAgentMACID = Session["UserName"].ToString();
+                    db.ParkingLogs.Add(parkingLog);
+                    db.SaveChanges();
+                }
             }
-                return View(parkingLog);
-           
+            ModelState.Clear();
+            return View();
         }
 
         
