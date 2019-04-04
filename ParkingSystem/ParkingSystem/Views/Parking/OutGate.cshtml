@@ -1,0 +1,53 @@
+﻿@model ParkingSystem.ParkingLog
+
+@{
+    ViewBag.Title = "OutGate";
+}
+
+@using (Html.BeginForm("Logout", "Login", FormMethod.Post))
+{
+    <td>
+        <input type="submit" value="Logout" />
+    </td>
+}
+
+@using (Html.BeginForm("OutGate", "Parking", FormMethod.Post))
+{
+    <fieldset>
+        <legend>OutGate Parking Entry </legend>
+        @Html.HiddenFor(a => a.INAgentMACID, new { @Value = Request.UserHostAddress.ToString() })
+        @Html.HiddenFor(a => a.Imagecdn, new { @Value = "https://imagecdn.com/car1.png" })
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @if (@ViewBag.Message != null)
+        {
+            <div style="border: 1px solid red">
+                @ViewBag.Message
+            </div>
+        }
+        <table>
+            <tr>
+                <td>@Html.LabelFor(a => a.PlateNumber)</td>
+                <td>@Html.TextBoxFor(a => a.PlateNumber)</td>
+                <td>@Html.ValidationMessageFor(a => a.PlateNumber)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Submit" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </fieldset>
+}
+
+
+<div class="error-label" style="color:red; font-weight:400">
+    @Html.DisplayName(TempData["errorMsg"].ToString())
+</div>
+
+<div style="color:green; font-size:larger; font-weight:400">
+    @Html.DisplayName(TempData["statusMsg"].ToString())
+</div>
+

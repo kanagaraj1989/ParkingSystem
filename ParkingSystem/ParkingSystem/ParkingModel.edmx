@@ -10,13 +10,15 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlateNumber" Type="varchar" MaxLength="30" />
+          <Property Name="Imagecdn" Type="varchar" MaxLength="100" />
           <Property Name="INAgentMACID" Type="varchar" MaxLength="50" />
           <Property Name="OUTAgentMACID" Type="varchar" MaxLength="50" />
           <Property Name="Status" Type="varchar" MaxLength="20" />
-          <Property Name="SessionID" Type="varchar" MaxLength="100" />
-          <Property Name="PlateNumber" Type="varchar" MaxLength="30" />
-          <Property Name="imagecdn" Type="varchar" MaxLength="100" />
-          <Property Name="TimeStamp" Type="datetime" />
+          <Property Name="InGateSessionID" Type="varchar" MaxLength="100" />
+          <Property Name="OutGateSessionID" Type="varchar" MaxLength="100" />
+          <Property Name="InTimeStamp" Type="datetime" />
+          <Property Name="OutTimeStamp" Type="datetime" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -75,13 +77,15 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlateNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Imagecdn" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="INAgentMACID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="OUTAgentMACID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="SessionID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="PlateNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="imagecdn" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="InGateSessionID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="OutGateSessionID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="InTimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="OutTimeStamp" Type="DateTime" Precision="3" />
           <NavigationProperty Name="UserProfile" Relationship="Self.FK_ParkingLogs_UserProfile_INAgentMACID" FromRole="ParkingLogs" ToRole="UserProfile" />
           <NavigationProperty Name="UserProfile1" Relationship="Self.FK_ParkingLogs_UserProfile_OUTAgentMACID" FromRole="ParkingLogs" ToRole="UserProfile" />
         </EntityType>
@@ -144,13 +148,15 @@
             <EntityTypeMapping TypeName="ParkingModel.ParkingLog">
               <MappingFragment StoreEntitySet="ParkingLogs">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PlateNumber" ColumnName="PlateNumber" />
+                <ScalarProperty Name="Imagecdn" ColumnName="Imagecdn" />
                 <ScalarProperty Name="INAgentMACID" ColumnName="INAgentMACID" />
                 <ScalarProperty Name="OUTAgentMACID" ColumnName="OUTAgentMACID" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
-                <ScalarProperty Name="PlateNumber" ColumnName="PlateNumber" />
-                <ScalarProperty Name="imagecdn" ColumnName="imagecdn" />
-                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="InGateSessionID" ColumnName="InGateSessionID" />
+                <ScalarProperty Name="OutGateSessionID" ColumnName="OutGateSessionID" />
+                <ScalarProperty Name="InTimeStamp" ColumnName="InTimeStamp" />
+                <ScalarProperty Name="OutTimeStamp" ColumnName="OutTimeStamp" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -16,13 +16,13 @@
 }
 
 <div>
-    <h1>Create Entry / Exit Gate</h1>
+    <h1>Create Entry / Exit Gate Account.</h1>
 </div>
 
 @using (Html.BeginForm("CreateGate", "Login", FormMethod.Post))
 {
     <fieldset>
-        <legend>Parking System Login page</legend>
+        <legend>IN/OUT Gate Registration Page</legend>
 
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
@@ -69,4 +69,11 @@
     </fieldset>
 }
 
+<div class="error-label" style="color:red; font-weight:400">
+    @Html.DisplayName(TempData["errorMsg"].ToString())
+</div>
+
+<div id="success-msg" class="success-label" style="color:red; font-weight:400">
+    @Html.DisplayName(TempData["statusMsg"].ToString())
+</div>
 

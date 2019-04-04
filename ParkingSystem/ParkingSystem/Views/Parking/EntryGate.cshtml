@@ -15,9 +15,9 @@
 @using (Html.BeginForm("EntryGate", "Parking", FormMethod.Post))
 {
     <fieldset>
-        <legend>Parking System Login page</legend>
+        <legend>InGate Parking Entry</legend>
         @Html.HiddenFor(a => a.INAgentMACID, new { @Value = Request.UserHostAddress.ToString() })
-        @Html.HiddenFor( a=> a.imagecdn, new { @Value = "https://imagecdn.com/car1.png" })
+        @Html.HiddenFor( a=> a.Imagecdn, new { @Value = "https://imagecdn.com/car1.png" })
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
         @if (@ViewBag.Message != null)
@@ -42,3 +42,7 @@
         </table>
     </fieldset>
 }
+
+<div style="color:green; font-size:larger; font-weight:400">
+    @Html.DisplayName(TempData["statusMsg"].ToString())
+</div>
